@@ -1,4 +1,4 @@
-Bandwidth limitation using a script (Simple Queues) on MikroTik
+Limitasi kecepatan bandwidth menggunakan metode skrip (Bandwidth speed limitation using script simple queues method)
 
 Bagaimana cara menggunakannya?
 Salin/Copy skrip dibawah ini:
