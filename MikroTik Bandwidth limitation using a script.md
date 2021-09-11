@@ -1,4 +1,5 @@
 ENGLISH
+
 Bandwidth speed limitation using script simple queues method
 
 Here's how to use the script:
@@ -11,6 +12,7 @@ The following are the steps to use the script:
 5. Finally, press "Enter" to run / enter the script into MikroTik, and it will be created automatically. The IP Address can be changed to match the IP Address and client name that was specified.
 
 BAHASA INDONESIA
+
 Limitasi kecepatan bandwidth menggunakan metode skrip 
 
 Bagaimana cara menggunakan skrip?
