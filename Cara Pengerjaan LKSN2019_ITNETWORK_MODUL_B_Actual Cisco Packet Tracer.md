@@ -44,18 +44,54 @@ b. Permasalahan terdapat pada interface Fa0/1 keadaan "shutdown" atau mati inter
 5. ASW-01(config):int fa0/6
 6. ASW-01(config):switchport access vlan 10
 
-c. Cek disisi client yang terhubung ke switch "ASW-01" pada laptop KG8
+A. Laptop (KG8)
+a. Cek disisi client yang terhubung ke switch "ASW-01" pada laptop KG8
 1. Laptop (KG8)
 2. Desktop
 3. IP Address
 4. Pilih "DHCP"
 
-c. Permasalahan belum terdapat alamat IP VLAN 20 yang diinginkan soal, solusinya harus mengkonfigurasi IP VLAN 20
+b. Permasalahan belum terdapat alamat IP VLAN 20 yang diinginkan soal, solusinya harus mengkonfigurasi IP VLAN 20
 1. ASW-01(config):int vlan 20
 2. ASW-01(config):ip address 192.168.20.250 255.255.255.0
 3. ASW-01(config):do write
 
-d. Pastikan kembali apakah sudah dikonfigurasi IP Addressnya di sisi switch "ASW-01" dan sisi client Phone KREMLIN (7960)
+c. Pastikan kembali apakah sudah dikonfigurasi IP Addressnya di sisi switch "ASW-01" dan sisi client Phone KREMLIN (7960)
 1. Arahkan kursor pada switch dan diamkan sesaat
 2. Arahkan kursor pada KREMLIN 7960 dan diamkan sesaat
 
+D. FW-01
+a. Permasalahan terdapat pada interface Gig1/3 keadaan "shutdown"
+FW-01(config):int gig1/3
+FW-01(config-if):no shutdown
+FW-01(config-if):do write
+
+E. RT-MOW
+a. Permasalahan terdapat pada NAT disisi interface Gig0/1 interface nat mengarah keluar jaringan
+1. RT-MOW(config):int g0/1
+2. RT-MOW(config)-if:ip nat outside
+3. RT-MOW(config):do write
+4. RT-MOW(config):do show run
+
+F. Pengujian antar client to client ke jaringan luar
+1. Tes ping Laptop KGB ke Phone YURI
+2. Tes ping KREMLIN ke Phone YURI
+3. Ubah IP Dynamic menjadi Static dan nyalakan kembali ke "DHCP" pada Laptop KGB
+4. Pastikan kembali apakah Line Number sudah otomatis terisi 1001
+5. Arahkan kursor ke Laptop KGB, Lihatlah!
+6. Klik dan cek ke Desktop > IP Communicator. Apakah sudah ada Line Number 1001?
+7. Kemudian cek juga KREMLIN dengan mengarahkan kursor pada Phone KREMLIN atau bisa klik langsung pada Phone > GUI > Zoom In > Lihatlah! Apakah sudah sesuai dengan yang diinginkan soal/pada tabel Ext. Number/Line Number?
+8. Cek juga YURI sama seperti poin 7
+
+F. RT-KVX
+a. Permasalahan pada Router RT-KVX pada bagian interface se0/1/0 yang belum di "encapsulation ppp, authentication ppp, ppp pap sent-username RT-KVX password Pa$$worD" dan belum dinyalkan pada sisi interface se0/1/0. Solusinya nyalakan interface se0/1/0 dan tambahkan dan konfigurasi "encapsulation ppp, authentication ppp, ppp pap sent-username RT-KVX password Pa$$worD" dan pastikan apakah sudah up atau belum? 
+1. RT-KVX(config):int se0/1/0
+2. RT-KVX(config-if):no shutdown
+3. RT-KVX(config-if):encapsulation ppp
+4. RT-KVX(config-if):authentication ppp
+5. RT-KVX(config-if):ppp pap sent-username RT-KVX password Pa$$worD
+6. RT-KVX(config-if):do sh int se0/1/0
+7. RT-KVX(config-if):do write
+
+b. Permasalahan pada Autonomous (AS) Number "ospf 300" seharusnya adalah "ospf 3000" sesuai dengan disoal ubah ke "ospf 3000" 
+9. RT-KVX(config-if):
