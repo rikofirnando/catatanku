@@ -83,7 +83,7 @@ F. Pengujian antar client to client ke jaringan luar
 7. Kemudian cek juga KREMLIN dengan mengarahkan kursor pada Phone KREMLIN atau bisa klik langsung pada Phone > GUI > Zoom In > Lihatlah! Apakah sudah sesuai dengan yang diinginkan soal/pada tabel Ext. Number/Line Number?
 8. Cek juga YURI sama seperti poin 7
 
-F. RT-KVX
+G. RT-KVX
 a. Permasalahan pada Router RT-KVX pada bagian interface se0/1/0 yang belum di "encapsulation ppp, authentication ppp, ppp pap sent-username RT-KVX password Pa$$worD" dan belum dinyalkan pada sisi interface se0/1/0. Solusinya nyalakan interface se0/1/0 dan tambahkan dan konfigurasi "encapsulation ppp, authentication ppp, ppp pap sent-username RT-KVX password Pa$$worD" dan pastikan apakah sudah up atau belum? 
 1. RT-KVX(config):int se0/1/0
 2. RT-KVX(config-if):no shutdown
@@ -101,3 +101,24 @@ b. Permasalahan pada Autonomous (AS) Number "ospf 300" seharusnya adalah "ospf 3
 5. RT-KVX(config-if):network 10.0.1.0 255.255.255.0 area 0
 6. RT-KVX(config-if):do wr
 7. RT-KVX(config-if):do show ip ospf
+
+H. Pengujian tes ping 1.1.1.1 atau ke "wsc2019.ru" melalui semua clients/devices, setting DNS services pada "Server-PT wsc2019.ru", dan pengujian ping kedua laptop ke Server-PT wsc2019.ru, kemudian tes internet ke "wsc2019.ru" apakah sudah berjalan atau belum?
+1. Klik Server-PT wsc2019.ru
+2. Services
+3. DNS
+4. Masukan "Name: Server-PT wsc2019.ru, dan Address: 1.1.1.1"
+5. Save
+6. Pengujian ping "ICMP" dari 2 Laptop ke Server-PT wsc2019.ru
+7. Cek melalui Browser, 
+8. Klik Server-PT ROSATOM
+9. Pilih Tab Desktop
+10. Kemudian, klik Web Browser
+11. Masukan wsc2019.ru
+12. Pengujian dari sisi client kedua Laptop sama seperti di poin 8-11 
+13. Cek IP NAT pada router "RT-MOW" > do show ip nat/show ip nat 
+
+I. Pengujian antar Telepon (PHONE) untuk saling menghubungi satu sama lain dengan memasukan Ext. Number/Line Number dan pastikan apakah sudah atau berhasil terhubung 
+1. KREMLIN: 1002 (Hubungi YURI)
+2. dan sebaliknya YURI: 1001 (Hubungi KREMLIN)
+3. Terakhir hubungi ke Laptop KGB
+4. Apakah sudah bisa terhubung atau belum?
