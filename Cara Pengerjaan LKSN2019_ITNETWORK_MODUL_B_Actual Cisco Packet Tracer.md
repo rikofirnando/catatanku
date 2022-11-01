@@ -94,9 +94,10 @@ a. Permasalahan pada Router RT-KVX pada bagian interface se0/1/0 yang belum di "
 7. RT-KVX(config-if):do write
 
 b. Permasalahan pada Autonomous (AS) Number "ospf 300" seharusnya adalah "ospf 3000" sesuai dengan disoal ubah ke "ospf 3000" dan "network 192.168.100.0 255.255.255.0 area 1, network 10.1.1.0 255.255.255.252 area 0, network 10.0.1.0 255.255.255.0 area 0" 
-1. RT-KVX(config):
-2. RT-KVX(config):
-3. RT-KVX(config):
-4. RT-KVX(config):
-5. RT-KVX(config):
-6. RT-KVX(config):
+1. RT-KVX(config):no router ospf 300
+2. RT-KVX(config):router ospf 3000
+3. RT-KVX(config-if):network 192.168.100.0 255.255.255.0 area 1
+4. RT-KVX(config-if):network 10.1.1.0 255.255.255.252 area 0
+5. RT-KVX(config-if):network 10.0.1.0 255.255.255.0 area 0
+6. RT-KVX(config-if):do wr
+7. RT-KVX(config-if):do show ip ospf
