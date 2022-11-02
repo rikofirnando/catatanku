@@ -1,4 +1,5 @@
 Berikut langkah-langkah cara Pengerjaan LKSN2019_ITNETWORK_MODUL_B_Actual Cisco Packet Tracer: 
+
 A. DSW-01 Multi Layer Switch (MLS)
 Permasalahan yang terjadi:
 a. Belum membuat "VLAN 20 Voice" dan mengaktifkan "Switchport mode trunk"
