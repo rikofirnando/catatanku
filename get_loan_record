@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# Show How many days ago do you want to input?
+echo "How many days ago? (e.g. 2, 3)"
+read days_ago
+
+# Variables
+yesterday=$(date --date="$days_ago day ago" +%Y%m%d)
+
+# 1. LOAN RECORD
+# PROD 5
+echo "COUNTING DAILY LOAN RECORD PROD5..."
+total_loan_record_prod5=$(ssh -t apps@prod5 "wc -l /apps/loena2/logs/frontend/tomcat_loan_record/*/LOAN_RECORD_${yesterday}_*.log" | tail -n 1 | awk '{print "TOTAL LOAN RECORD PROD 5= " $1}')
+
+
+# PROD 6
+echo "COUNTING DAILY LOAN RECORD PROD6..."
+total_loan_record_prod6=$(ssh -t apps@prod6 "wc -l /apps/loena2/logs/frontend/tomcat_loan_record/*/LOAN_RECORD_${yesterday}_*.log" | tail -n 1 | awk '{print "TOTAL LOAN RECORD PROD 6= " $1}')
+
+
+# GABUNGAN LOAN RECORD 5 & 6
+echo "COUNTING THE TOTAL LOAN RECORD..."
+total_loan_record_prod5_6=$(ssh -t apps@prod6 ssh birefusr@10.54.3.206 "wc -l /landing/tsel/higt_trans/loena_loan_record/LOAN_RECORD_${yesterday}_*.log" | tail -n 1 | awk '{print "TOTAL GABUNGAN LOAN RECORD PROD 5 dan 6= " $1}')
+
+
+# LOAN RECORD SNAPSHOT
+echo "CHECKING LOAN RECORD SNAPSHOT..."
+if ssh -t apps@prod6 ssh -t birefusr@10.54.3.206 test -e "/landing/tsel/higt_trans/loena_loan_record_daily_snapshot/LOAN_RECORD_SNAPSHOT_${yesterday}_PAPP7.ctl"; then
+  total_loan_record_snapshot=$(ssh -t apps@prod6 ssh -t birefusr@10.54.3.206 "cat /landing/tsel/higt_trans/loena_loan_record_daily_snapshot/LOAN_RECORD_SNAPSHOT_${yesterday}_PAPP7.ctl 2> /dev/null" | awk -F "|" '{print "LOAN RECORD SNAPSHOT= " $2}')
+else
+  total_loan_record_snapshot=$(ssh -t apps@prod6 ssh -t birefusr@10.54.3.206 "zcat /landing/tsel/higt_trans/loena_loan_record_daily_snapshot/LOAN_RECORD_SNAPSHOT_${yesterday}_PAPP7.ctl.gz 2> /dev/null" | awk -F "|" '{print "LOAN RECORD SNAPSHOT= " $2}')
+fi
+
+echo "$total_loan_record_prod5"
+echo "$total_loan_record_prod6"
+echo "$total_loan_record_prod5_6"
+echo "$total_loan_record_snapshot"
