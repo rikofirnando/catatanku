@@ -1,0 +1,4 @@
+Connection Test (Telnet) v1
+for i in 10.49.3.201 10.49.3.202 10.49.3.197 10.49.3.198; do (echo quit) | telnet $i 1521; done
+Connection Test (Telnet) v2
+for i in 10.49.3.201 10.49.3.202 10.49.3.197 10.49.3.198; do (echo quit) | telnet $i 1521; done
