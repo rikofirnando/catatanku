@@ -1,0 +1,27 @@
+pathtomcat=(
+"/apps/loena2/services_v2/tomcat_loan_record/tomcat0/bin/"
+"/apps/loena2/services_v2/tomcat_loan_record/tomcat1/bin/"
+"/apps/loena2/services_v2/tomcat_cls/tomcat0/bin/"
+"/apps/loena2/services_v2/tomcat_cls/tomcat1/bin/"
+"/apps/loena2/services_v2/tomcat_bi_receiver/tomcat0/bin/"
+"/apps/loena2/services_v2/tomcat_bi_receiver/tomcat1/bin/"
+"/apps/loena2/services_v2/tomcat_mb_receiver/tomcat0/bin/"
+"/apps/loena2/services_v2/tomcat_mb_receiver/tomcat1/bin/"
+"/apps/loena2/services_v2/tomcat_payment_receiver/tomcat0/bin/"
+"/apps/loena2/services_v2/tomcat_payment_receiver/tomcat1/bin/"
+)
+
+echo "SHUTDOWN_all service tomcat"
+echo ""
+
+for service in "${pathtomcat[@]}"
+do
+  echo ""
+  echo "$pathtomcat : running.."
+  cd $pathtomcat
+#  ./shutdown.sh
+  ./catalina.sh stop
+  date
+
+done
+echo ""
