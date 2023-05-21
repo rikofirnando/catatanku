@@ -32,6 +32,7 @@ echo "CHECKING DOM SERVICE..."
 dom_service=$(ssh -q -t apps@prod7 "ps aux | grep be_pt_dom" 2>/dev/null)
 
 # Print the Result
+echo "                     "
 echo "Date Ago: $last_date"
 echo "$churn_files"
 echo "$countlines_churn_files"
