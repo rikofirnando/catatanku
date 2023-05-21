@@ -33,13 +33,13 @@ dom_service=$(ssh -q -t apps@prod7 "ps aux | grep be_pt_dom" 2>/dev/null)
 
 # Print the Result
 echo "                     "
-echo "Date Ago: $last_date"
+echo -e "Date Ago:\n$last_date"
 echo "$churn_files"
 echo "$countlines_churn_files"
 echo "$dom_files"
 echo "$countlines_dom_files"
-echo "========================================================================================================"
+echo "                       "
 echo "Date Now: $current_date"
-echo -e "CHURN SERVICE\n $churn_service"
-echo "========================================================================================================"
-echo -e "DOM SERVICE\n $dom_service"
+echo -e "CHURN SERVICE=========================================================================================\n $churn_service"
+echo "                     "
+echo -e "DOM SERVICE===========================================================================================\n $dom_service"
