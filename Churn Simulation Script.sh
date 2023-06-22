@@ -25,3 +25,5 @@ echo "You have completed the Churn simulation. Please check the TDR and Debug lo
 echo "                                                "
 echo "Debug log can be found at /apps/loena2/logs/backend/be_pt_churn/0/debug.log"
 echo "TDR log can be found at /apps/loena2/logs/backend/be_pt_churn/0/CHURN_FILE.log"
+echo "Please recheck the Loena_Profile_Churn_History table to determine if it has been updated. If it has been updated successfully, access the Loena_Profile_Churn_History table."
+echo "Loena_Profile table > Loena_Profile_Churn_History"
