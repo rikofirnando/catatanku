@@ -44,6 +44,7 @@ DISM /Online /Get-TargetEditions
 **To set your Windows Server to a higher edition:**
 ```bash
 DISM /online /Set-Edition:ServerStandard /ProductKey:XXXXX-XXXXX-XXXXX-XXXXX-XXXXX /AcceptEula
+DISM /online /Set-Edition:ServerDatacenter /ProductKey:XXXXX-XXXXX-XXXXX-XXXXX-XXXXX /AcceptEula
 ```
 
 ### Step 3 - Install KMS client key
