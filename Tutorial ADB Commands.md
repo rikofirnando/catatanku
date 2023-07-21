@@ -18,5 +18,10 @@ Contoh Samsung A21s:
 4. Kemudian tunggu hingga muncul pesan "Success"
 
 ## Cara uninstall paket atau aplikasi (.apk)
-1. 
+1. Cari nama aplikasi tersebut
+- adb shell pm list packages
+2. Jika sudah ketemu aplikasi yang ingin di uninstall dapat langsung uninstall dengan cara berikut:
+- adb uninstall com.topjohnwu.magisk
+- Tunggu sampai muncul pesan "Success" artinya sudah berhasil meng-uninstall aplikasi
+- Alternatif jika ingin force uninstall dapat lalkukan dengan cara "adb uninstall -k com.topjohnwu.magisk"
  
