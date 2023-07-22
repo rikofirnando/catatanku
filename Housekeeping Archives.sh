@@ -37,7 +37,7 @@ if [ "$current_percentage_before" -gt "$threshold_percentage" ]; then
   echo "The archiving process is completed."
 else
   echo "Storage usage percentage: $current_percentage_before%"
-  echo "Storage usage is below or less than ${threshold_percentage}%. Tidak perlu pengarsipan."
+  echo "Storage usage is below or less than ${threshold_percentage}%. No archiving needed."
 fi
 
 # Get the storage usage after archiving.
@@ -59,4 +59,3 @@ echo "1. Before archiving: "
 echo "$get_storage_usage_before"
 echo "2. After archiving: "
 echo "$(df -ah "$target_directory")"
-
