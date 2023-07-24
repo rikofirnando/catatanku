@@ -1,18 +1,25 @@
 # Find the files in the archive
+## A. Regular File Only
+## Case Sensitive
 1. Mencari file dengan karakter atau kata yang sensitif dan tambahan opsi hanya mencari regular file
 ```bash
 find "/data/" -type f -name 'LedGer_SnapShot_*.log'
+find /data/ -type f -name 'LedGer_SnapShot_*.log'
 ```
 ```bash
 find "/data/" -type f -name 'LEDGER_SNAPSHOT_*.log'
+find /data/ -type f -name 'LEDGER_SNAPSHOT_*.log'
 ```
+## Incase Sensitive
 2. Mencari file dengan karakter atau kata yang sensitif dan tambahan opsi hanya mencari regular file
+```bash
 find "/data/" -type f -iname 'LedGer_SnapShot_*.log'
+find /data/ -type f -iname 'LedGer_SnapShot_*.log'
+```
+```bash
 find "/data/" -type f -iname 'LEDGER_SNAPSHOT_*.log'
-
-
-find "/data/" -type f ! -name 'LEDGER_SNAPSHOT_*.log'
-find "/data/" -type f ! -iname 'LEDGER_SNAPSHOT_*.log'
+find /data/ -type f -iname 'LEDGER_SNAPSHOT_*.log'
+```
 
 find /data/ -name "*.log" -not -name "*.log.gz" -exec gzip -v {} \;
 
