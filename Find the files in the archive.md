@@ -1,11 +1,12 @@
-1. Mencari file dengan karakter atau kata yang sensitif
+# Find the files in the archive
+1. Mencari file dengan karakter atau kata yang sensitif dan tambahan opsi hanya mencari regular file
 ```bash
 find "/data/" -type f -name 'LedGer_SnapShot_*.log'
 ```
 ```bash
 find "/data/" -type f -name 'LEDGER_SNAPSHOT_*.log'
 ```
-2. Mencari file dengan karakter atau kata yang sensitif
+2. Mencari file dengan karakter atau kata yang sensitif dan tambahan opsi hanya mencari regular file
 find "/data/" -type f -iname 'LedGer_SnapShot_*.log'
 find "/data/" -type f -iname 'LEDGER_SNAPSHOT_*.log'
 
