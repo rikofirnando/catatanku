@@ -21,6 +21,8 @@ find "/data/" -type f -iname 'LEDGER_SNAPSHOT_*.log'
 find /data/ -type f -iname 'LEDGER_SNAPSHOT_*.log'
 ```
 
+find "/data/" -type f -iname 'LEDGER_SNAPSHOT_*.log' -ctime -1 
+
 find /data/ -name "*.log" -not -name "*.log.gz" -exec gzip -v {} \;
 
 find /data/ -name "*.log" -print -o -name "*.log.gz" -prune | xargs gzip -v
