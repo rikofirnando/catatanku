@@ -1,6 +1,8 @@
 1. Mencari file dengan karakter atau kata yang sensitif
 ```bash
 find "/data/" -type f -name 'LedGer_SnapShot_*.log'
+```
+```bash
 find "/data/" -type f -name 'LEDGER_SNAPSHOT_*.log'
 ```
 2. Mencari file dengan karakter atau kata yang sensitif
