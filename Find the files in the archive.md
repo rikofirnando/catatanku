@@ -21,6 +21,11 @@ find "/data/" -type f -iname 'LEDGER_SNAPSHOT_*.log'
 find /data/ -type f -iname 'LEDGER_SNAPSHOT_*.log'
 ```
 
+find /data/ -type f -exec du -h {} + | sort -rh
+find /data/ -type f -exec du -h {} + | sort -rh | head -n 100
+find /data/ -type f -exec du -h {} + | sort -rh | tail -n 100
+df -ah /data/
+
 find "/data/" -type f -iname 'LEDGER_SNAPSHOT_*.log' -ctime -1 
 
 find /data/ -name "*.log" -not -name "*.log.gz" -exec gzip -v {} \;
