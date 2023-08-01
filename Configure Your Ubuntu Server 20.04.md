@@ -198,6 +198,9 @@ echo "search cilestri.id\nnameserver 192.168.10.27\nnameserver 8.8.8.8\nnameserv
 echo "search cilestri.id\nnameserver 192.168.10.28\nnameserver 8.8.8.8\nnameserver 8.8.4.4" >> /etc/resolv.conf
 # Server 3 (cilestri-3)
 echo "search cilestri.id\nnameserver 192.168.10.29\nnameserver 8.8.8.8\nnameserver 8.8.4.4" >> /etc/resolv.conf
+# Or you can update Resolvconf
+resolvconf --enable-updates
+resolvconf -u
 cat /etc/resolv.conf
 ```
 f. Verify your Network connection
