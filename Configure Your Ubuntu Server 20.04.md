@@ -145,14 +145,61 @@ Edit the Hostname file:
 nano /etc/hostname
 vi /etc/hostname
 ```
+Apply for Server 1, 2, and 3.
 E.G:
 ```
 cilestri-1
 cilestri-2
 cilestri-3
 ```
-
-
-
-
+# 5. Set Resolv.conf file
+a. Install Resolvconf to set DNS permanently
+```bash
+apt install resolvconf
+```
+b. Enable, Start and Check the Resolvconf service
+```
+systemctl enable resolvconf
+systemctl start resolvconf
+systemctl status resolvconf
+```
+c. Edit this file:
+```bash
+nano /etc/resolvconf/resolv.conf.d/head
+vi /etc/resolvconf/resolv.conf.d/head
+```
+E.G:
+Add these scripts and apply for third servers
+```
+search cilestri.id
+nameserver 192.168.10.28
+nameserver 8.8.8.8
+nameserver 8.8.4.4
+```
+d. Update Resolvconf
+```bash
+resolvconf --enable-updates
+resolvconf -u
+```
+e. Verify your Resolv.conf file
+```bash
+cat /etc/resolv.conf
+```
+## If you have faced the problem with your name resolution, do this.
+``` bash
+rm /etc/resolv.conf
+ln -s /run/systemd/resolve/resolv.conf /etc/resolv.conf
+echo "nameserver 8.8.8.8\nnameserver 8.8.4.4" >> /etc/resolv.conf
+```
+f. Verify your Network connection
+- Ping to DNS Forward (fDNS)
+```
+ping google.com
+ping bing.com
+```
+- Ping to DNS Reverse (rDNS)
+```
+ping 8.8.8.8
+ping 8.8.4.4
+```
 
