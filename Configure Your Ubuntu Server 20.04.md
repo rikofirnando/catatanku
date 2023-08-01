@@ -333,13 +333,21 @@ g. Copy id_rsa.pub to other servers to remote server easily without fill the pas
 ssh-copy-id root@192.168.10.27
 ssh-copy-id root@192.168.10.28
 ssh-copy-id root@192.168.10.29
-# Or if with the port option
+# Or  by adding port option
 ssh-copy-id -p 2023 root@192.168.10.27
 ssh-copy-id -p 2023 root@192.168.10.28
 ssh-copy-id -p 2023 root@192.168.10.29
 ```
-
-
+f. Verify your private and public keys
+```
+ssh root@192.168.10.27
+ssh root@192.168.10.28
+ssh root@192.168.10.29
+# Or by adding port option
+ssh root@192.168.10.27 -p 2023
+ssh root@192.168.10.28 -p 2023
+ssh root@192.168.10.29 -p 2023
+```
 
 
 
