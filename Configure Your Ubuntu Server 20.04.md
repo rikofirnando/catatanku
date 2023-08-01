@@ -173,7 +173,26 @@ vi /etc/resolvconf/resolv.conf.d/head
 E.G:
 Add these scripts and apply for third servers
 ```
+# Server 1 (cilestri-1)
 search cilestri.id
+nameserver 192.168.10.27
+nameserver 192.168.10.28
+nameserver 192.168.10.29
+nameserver 8.8.8.8
+nameserver 8.8.4.4
+
+# Server 2 (cilestri-2)
+search cilestri.id
+nameserver 192.168.10.28
+nameserver 192.168.10.27
+nameserver 192.168.10.29
+nameserver 8.8.8.8
+nameserver 8.8.4.4
+
+# Server 3 (cilestri-3)
+search cilestri.id
+nameserver 192.168.10.29
+nameserver 192.168.10.27
 nameserver 192.168.10.28
 nameserver 8.8.8.8
 nameserver 8.8.4.4
@@ -193,11 +212,11 @@ rm /etc/resolv.conf
 ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf # If this command doesn't work you can use the second command below:
 ln -sf /run/resolvconf/resolv.conf /etc/resolv.conf
 # Server 1 (cilestri-1)
-echo "search cilestri.id\nnameserver 192.168.10.27\nnameserver 8.8.8.8\nnameserver 8.8.4.4" >> /etc/resolv.conf
+echo "search cilestri.id\nnameserver 192.168.10.27\nnameserver 192.168.10.28\nnameserver 192.168.10.29\nnameserver 8.8.8.8\nnameserver 8.8.4.4" >> /etc/resolv.conf
 # Server 2 (cilestri-2)
-echo "search cilestri.id\nnameserver 192.168.10.28\nnameserver 8.8.8.8\nnameserver 8.8.4.4" >> /etc/resolv.conf
+echo "search cilestri.id\nnameserver 192.168.10.28\nnameserver 192.168.10.27\nnameserver 192.168.10.29\nnameserver 8.8.8.8\nnameserver 8.8.4.4" >> /etc/resolv.conf
 # Server 3 (cilestri-3)
-echo "search cilestri.id\nnameserver 192.168.10.29\nnameserver 8.8.8.8\nnameserver 8.8.4.4" >> /etc/resolv.conf
+echo "search cilestri.id\nnameserver 192.168.10.29\nnameserver 192.168.10.28\nnameserver 192.168.10.27\nnameserver 8.8.8.8\nnameserver 8.8.4.4" >> /etc/resolv.conf
 # Or you can update Resolvconf
 resolvconf --enable-updates
 resolvconf -u
@@ -381,7 +400,7 @@ cd /etc/bind/
 cp db.local db.cilestri_fwd
 cp db.local db.cilestri_rvs
 ```
-- Edit "db.cilestri_fwd" di sisi Server 1 (cilestri.id)
+- Edit "db.cilestri_fwd" di sisi Server 1 (cilestri-1)
 ```
 nano db.cilestri_fwd
 nano db.cilestri_fwd --linenumbers
@@ -413,7 +432,7 @@ ftp     IN      A       192.168.10.27
 mail    IN      A       192.168.10.27
 monitor IN      A       192.168.10.27
 ```
-- Edit "db.cilestri_rvs" file di sisi Server 1 (cilestri.id)
+- Edit "db.cilestri_rvs" file di sisi Server 1 (cilestri-1)
 ```
 nano db.cilestri_rvs
 nano db.cilestri_rvs --linenumbers
@@ -443,7 +462,7 @@ $TTL    604800
 27      IN      PTR     ftp.cilestri.id.
 27      IN      PTR     monitor.cilestri.id.
 ```
-- Edit "named.conf.local" file di sisi Server 1 (cilestri.id)
+- Edit "named.conf.local" file di sisi Server 1 (cilestri-1)
 ```
 nano named.conf.local
 nano named.conf.local --linenumbers
@@ -464,14 +483,14 @@ zone "10.168.192.in-addr.arpa" IN {
     allow-transfer {192.168.10.28;};
 };
 ```
-- Edit "named.conf.options" file di sisi Server 1 (cilestri.id)
+- Edit "named.conf.options" file di sisi Server 1 (cilestri-1)
 ```
 nano named.conf.options
 nano named.conf.options --linenumbers
 vi named.conf.options
 ```
 
-- Edit DNS file like this. E.G:
+- Edit Domain Forwarders  file like this. E.G:
 ```
 options {
         directory "/var/cache/bind";
@@ -481,6 +500,119 @@ options {
 
         forwarders {
         192.168.10.27;
+        8.8.8.8;
+        8.8.4.4;
+        };
+        dnssec-validation auto;
+
+        #listen-on-v6 { any; };
+};
+```
+- Untuk Server ke-2 (cilestri-2) bisa terapkan hal yang sama dengan yang Server 1 (cilestri-1) untuk Backup DNS
+```bash
+cp db.local db.cilestri_fwd
+cp db.local db.cilestri_rvs
+```
+- Edit "db.cilestri_fwd" di sisi Server 2 (cilestri-2)
+```
+nano db.cilestri_fwd
+nano db.cilestri_fwd --linenumbers
+vi db.cilestri_fwd
+```
+- Edit DNS Forward like this. E.G:
+```
+;
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     cilestri.web. root.cilestri.web. (
+                              2         ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+@       IN      NS      ns1.cilestri.id.
+@       IN      NS      ns2.cilestri.id.
+@       IN      A       192.168.10.28
+@       IN      MX 5    mail.cilestri.id.
+@       IN      MX 5    192.168.10.28
+ns1     IN      A       192.168.10.27
+ns2     IN      A       192.168.10.28
+www     IN      A       192.168.10.28
+blog    IN      A       192.168.10.28
+ftp     IN      A       192.168.10.28
+mail    IN      A       192.168.10.28
+monitor IN      A       192.168.10.28
+```
+- Edit "db.cilestri_rvs" file di sisi Server 2 (cilestri-2)
+```
+nano db.cilestri_rvs
+nano db.cilestri_rvs --linenumbers
+vi db.cilestri_rvs
+```
+- Edit DNS Reverse like this. E.G:
+```
+;
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     cilestri.id. root.cilestri.id. (
+                              1         ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+@       IN      NS      ns1.cilestri.id.
+@       IN      NS      ns2.cilestri.id.
+27      IN      PTR     ns1.cilestri.id.
+28      IN      PTR     ns2.cilestri.id.
+28      IN      PTR     cilestri.id.
+28      IN      PTR     www.cilestri.id.
+28      IN      PTR     blog.cilestri.id.
+28      IN      PTR     mail.cilestri.id.
+28      IN      PTR     ftp.cilestri.id.
+28      IN      PTR     monitor.cilestri.id.
+```
+- Edit "named.conf.local" file di sisi Server 1 (cilestri.id)
+```
+nano named.conf.local
+nano named.conf.local --linenumbers
+vi named.conf.local
+```
+
+- Edit Zones file like this. E.G:
+```
+zone "cilestri.id" IN {
+        type slave;
+        file "/etc/bind/db.cilestri_fwd";
+        masters {192.168.10.27;};
+};
+
+zone "10.168.192.in-addr.arpa" IN {
+        type slave;
+        file "/etc/bind/db.cilestri_rvs";
+        masters {192.168.10.27;};
+};
+```
+- Edit "named.conf.options" file di sisi Server 1 (cilestri.id)
+```
+nano named.conf.options
+nano named.conf.options --linenumbers
+vi named.conf.options
+```
+
+- Edit Domain Forwarders  file like this. E.G:
+```
+options {
+        directory "/var/cache/bind";
+
+        allow-query{any;};
+        recursion yes;
+
+        forwarders {
+        192.168.10.28;
         8.8.8.8;
         8.8.4.4;
         };
