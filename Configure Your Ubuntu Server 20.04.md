@@ -233,8 +233,7 @@ a. Install SSH service
 apt install ssh
 apt install openssh-server -y
 ```
-b. 
-Edit sshd_config file:
+b.  Edit sshd_config file:
 ```bash
 nano /etc/ssh/sshd_config
 nano /etc/ssh/sshd_config --linenumbers
@@ -253,3 +252,36 @@ StrictModes yes
 MaxAuthTries 6
 MaxSessions 10
 ```
+c. Restart SSH service
+```bash
+/etc/init.d/ssh restart
+service ssh restart
+systemctl restart ssh
+```
+d. Verify your SSH connection
+```
+# Remote from Server 1 to 2
+ssh -p 2023 root@192.168.10.28
+
+# Remote from Server 1 to 3
+ssh -p 2023 root@192.168.10.27
+
+# Remote from Server 2 to 3
+ssh -p 2023 root@192.168.10.29
+
+# Remote from Server 2 to 1
+ssh -p 2023 root@192.168.10.27
+
+# Remote from Server 3 to 2
+ssh -p 2023 root@192.168.10.28
+
+# Remote from Server 3 to 1
+ssh -p 2023 root@192.168.10.27
+```
+If your server doesn't set Port to another Port, by default port is 22 so you do not need to add option -p. Just like this...
+```
+ssh root@192.168.10.27
+ssh root@192.168.10.28
+ssh root@192.168.10.29
+```
+
