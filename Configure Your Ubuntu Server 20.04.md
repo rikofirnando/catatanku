@@ -393,27 +393,27 @@ b. Install DNS Utils
 ```
 apt install dnsutils
 ```
-- Check Bind9 status
+c. Check Bind9 status
 ```
 systemctl status bind9
 ```
-c. Create duplicate template
-- Go to Bind directory
+d. Create duplicate template
+e. Go to Bind directory
 ```
 cd /etc/bind/
 ```
-- Create duplicate templates DNS Forward & Reverse
+f. Create duplicate templates DNS Forward & Reverse
 ```bash
 cp db.local db.cilestri_fwd
 cp db.local db.cilestri_rvs
 ```
-- Edit "db.cilestri_fwd" di sisi Server 1 (cilestri-1)
+g. Edit "db.cilestri_fwd" di sisi Server 1 (cilestri-1)
 ```
 nano db.cilestri_fwd
 nano db.cilestri_fwd --linenumbers
 vi db.cilestri_fwd
 ```
-- Edit DNS Forward like this. E.G:
+h. Edit DNS Forward like this. E.G:
 ```
 ;
 ; BIND data file for local loopback interface
@@ -439,13 +439,13 @@ ftp     IN      A       192.168.10.27
 mail    IN      A       192.168.10.27
 monitor IN      A       192.168.10.27
 ```
-- Edit "db.cilestri_rvs" file di sisi Server 1 (cilestri-1)
+i. Edit "db.cilestri_rvs" file di sisi Server 1 (cilestri-1)
 ```
 nano db.cilestri_rvs
 nano db.cilestri_rvs --linenumbers
 vi db.cilestri_rvs
 ```
-- Edit DNS Reverse like this. E.G:
+j. Edit DNS Reverse like this. E.G:
 ```
 ;
 ; BIND data file for local loopback interface
@@ -469,14 +469,14 @@ $TTL    604800
 27      IN      PTR     ftp.cilestri.id.
 27      IN      PTR     monitor.cilestri.id.
 ```
-- Edit "named.conf.local" file di sisi Server 1 (cilestri-1)
+k. Edit "named.conf.local" file di sisi Server 1 (cilestri-1)
 ```
 nano named.conf.local
 nano named.conf.local --linenumbers
 vi named.conf.local
 ```
 
-- Edit Zones file like this. E.G:
+l. Edit Zones file like this. E.G:
 ```
 zone "cilestri.id" IN {
         type master;
@@ -490,14 +490,14 @@ zone "10.168.192.in-addr.arpa" IN {
     allow-transfer {192.168.10.28;};
 };
 ```
-- Edit "named.conf.options" file di sisi Server 1 (cilestri-1)
+m. Edit "named.conf.options" file di sisi Server 1 (cilestri-1)
 ```
 nano named.conf.options
 nano named.conf.options --linenumbers
 vi named.conf.options
 ```
 
-- Edit Domain Forwarders  file like this. E.G:
+n. Edit Domain Forwarders  file like this. E.G:
 ```
 options {
         directory "/var/cache/bind";
@@ -546,13 +546,13 @@ systemctl status bind9.service
 cp db.local db.cilestri_fwd
 cp db.local db.cilestri_rvs
 ```
-- Edit "db.cilestri_fwd" di sisi Server 2 (cilestri-2)
+o. Edit "db.cilestri_fwd" di sisi Server 2 (cilestri-2)
 ```
 nano db.cilestri_fwd
 nano db.cilestri_fwd --linenumbers
 vi db.cilestri_fwd
 ```
-- Edit DNS Forward like this. E.G:
+p. Edit DNS Forward like this. E.G:
 ```
 ;
 ; BIND data file for local loopback interface
@@ -578,13 +578,13 @@ ftp     IN      A       192.168.10.28
 mail    IN      A       192.168.10.28
 monitor IN      A       192.168.10.28
 ```
-- Edit "db.cilestri_rvs" file di sisi Server 2 (cilestri-2)
+q. Edit "db.cilestri_rvs" file di sisi Server 2 (cilestri-2)
 ```
 nano db.cilestri_rvs
 nano db.cilestri_rvs --linenumbers
 vi db.cilestri_rvs
 ```
-- Edit DNS Reverse like this. E.G:
+r. Edit DNS Reverse like this. E.G:
 ```
 ;
 ; BIND data file for local loopback interface
@@ -608,14 +608,14 @@ $TTL    604800
 28      IN      PTR     ftp.cilestri.id.
 28      IN      PTR     monitor.cilestri.id.
 ```
-- Edit "named.conf.local" file di sisi Server 2 (cilestri-2)
+s. Edit "named.conf.local" file di sisi Server 2 (cilestri-2)
 ```
 nano named.conf.local
 nano named.conf.local --linenumbers
 vi named.conf.local
 ```
 
-- Edit Zones file like this. E.G:
+t. Edit Zones file like this. E.G:
 ```
 zone "cilestri.id" IN {
         type slave;
@@ -629,14 +629,14 @@ zone "10.168.192.in-addr.arpa" IN {
         masters {192.168.10.27;};
 };
 ```
-- Edit "named.conf.options" file di sisi Server 2 (cilestri-2)
+u. Edit "named.conf.options" file di sisi Server 2 (cilestri-2)
 ```
 nano named.conf.options
 nano named.conf.options --linenumbers
 vi named.conf.options
 ```
 
-- Edit Domain Forwarders  file like this. E.G:
+v. Edit Domain Forwarders  file like this. E.G:
 ```
 options {
         directory "/var/cache/bind";
@@ -666,7 +666,7 @@ scp db.cilestri_fwd db.cilestri_rvs named.conf.options named.conf.local root@192
 # Tinggal ubah sedikit dan sesuaikan saja
 # Seperti DNS Forward, DNS Reverse, Zones, dan Domain Forwarders bisa ikuti contoh sebelumnya yang bagian Server 2 (cilestri-2) ya
 ```
-d. Verify your Domain Servers
+x. Verify your Domain Servers
 ```
 # Do Ping
 ping cilestri.id
@@ -687,5 +687,29 @@ nslookup 192.168.10.28
 dig cilestri.id
 dig 192.168.10.27
 dig 192.168.10.28
+# Do Tracepath
+tracepath cilestri
 ```
-
+# 9. Install UFW (Firewall)
+a. Install UFW
+```
+apt update
+apt install ufw
+```
+b. Check UFW status
+```
+ufw status
+ufw status numbered
+```
+c. Enable UFW
+```
+ufw enable
+```
+d. Izinkan beberapa port yang perlu diizinkan
+```
+ufw allow 21
+ufw allow 22
+ufw allow 53
+ufw allow 80
+ufw allow 443
+```
