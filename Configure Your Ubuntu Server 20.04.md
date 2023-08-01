@@ -328,7 +328,16 @@ Enter same passphrase again:
 ```bash
 ls ~/.ssh
 ```
-
+g. Copy id_rsa.pub to other servers to remote server easily without fill the password
+```
+ssh-copy-id root@192.168.10.27
+ssh-copy-id root@192.168.10.28
+ssh-copy-id root@192.168.10.29
+# Or if with the port option
+ssh-copy-id -p 2023 root@192.168.10.27
+ssh-copy-id -p 2023 root@192.168.10.28
+ssh-copy-id -p 2023 root@192.168.10.29
+```
 
 
 
