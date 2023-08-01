@@ -508,7 +508,31 @@ options {
         #listen-on-v6 { any; };
 };
 ```
-- Untuk Server ke-2 (cilestri-2) bisa terapkan hal yang sama dengan yang Server 1 (cilestri-1) untuk Backup DNS
+
+Note: 
+_"Untuk Server ke-2 (cilestri-2) bisa terapkan hal yang sama dengan yang Server 1 (cilestri-1) untuk Backup DNS. Berikut dibawah ini:"_
+_"Jangan lupa juga untuk menginstall package libuv di kedua Server ya, apabila menemukaman masalah atau error lagi dengan cara:"_
+```
+# Update packageds dan/atau packages yang hilang atau bermasalah
+apt-get update or apt-get update --fix-missing
+# Pemasangan pacakage Libuv
+apt-get install libuv1 libuv1-dev libh2o-dev libh2o0.13 libluv-ocaml libluv-ocaml-dev libluv-unix-ocaml libluv-unix-ocaml-dev libuvc-dev libuvc-doc libuvc0 lua-luv  lua-luv-dev
+# Update lagi repositories-nya
+apt-get update
+# Add the repo
+add-apt-repository ppa:acooks/libwebsockets6
+# Install this pacakage
+apt install software-properties-common
+# Try to set Network
+netplan try
+# Tes ping koneksi ke IP dan Domain
+ping 8.8.8.8
+ping google.com
+# Restart DNS Server (bind9)
+service bind9 restart
+systemctl restart bind9.service
+```
+
 ```bash
 cp db.local db.cilestri_fwd
 cp db.local db.cilestri_rvs
@@ -575,7 +599,7 @@ $TTL    604800
 28      IN      PTR     ftp.cilestri.id.
 28      IN      PTR     monitor.cilestri.id.
 ```
-- Edit "named.conf.local" file di sisi Server 1 (cilestri.id)
+- Edit "named.conf.local" file di sisi Server 2 (cilestri-2)
 ```
 nano named.conf.local
 nano named.conf.local --linenumbers
@@ -596,7 +620,7 @@ zone "10.168.192.in-addr.arpa" IN {
         masters {192.168.10.27;};
 };
 ```
-- Edit "named.conf.options" file di sisi Server 1 (cilestri.id)
+- Edit "named.conf.options" file di sisi Server 2 (cilestri-2)
 ```
 nano named.conf.options
 nano named.conf.options --linenumbers
@@ -620,4 +644,14 @@ options {
 
         #listen-on-v6 { any; };
 };
+```
+Note:
+_"Untuk cara cepatnya bisa lakukan ini dengan mengirimkan file ke Server 2 (cilestri-2) sebagai Backup DNS dengan cara berikut:"_
+```
+# Masuk direktorinya terlebih dahulu
+cd /etc/bind/
+# Kirim file dari Server 1 (cilestri-1) ke Server 2 (cilestri-2)
+scp db.cilestri_fwd db.cilestri_rvs named.conf.options named.conf.local root@192.168.10.28:/etc/bind/
+# Tinggal ubah sedikit dan sesuaikan saja
+# Seperti DNS Forward, DNS Reverse, Zones, dan Domain Forwarders bisa ikuti contoh sebelumnya yang bagian Server 2 (cilestri-2) ya
 ```
