@@ -202,4 +202,19 @@ ping bing.com
 ping 8.8.8.8
 ping 8.8.4.4
 ```
+## 6. User Management
+Add new user to your server
+E.G:
+``` bash
+adduser riko
+adduser reffal
+```
+Don't forget to fill those Password on your users!
+Or another way is
+```bash
+useraddd riko
+passwd riko
+useradd reffal
+passwd ahlakiah
+```
 
