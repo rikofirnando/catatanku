@@ -46,7 +46,7 @@ apt update && apt upgrade
 apt update;apt upgrade
 ```
 
-# 2. Set Network (Netplan)
+# 2. Set Your Network Configuration to be IP Static (Netplan)
 Edit this file:
 ```bash
 nano /etc/netplan/00-installer-config.yaml
@@ -109,3 +109,50 @@ Or you can apply your netplan configuration directly.
 ```bash
 netplan apply
 ```
+# 3. Configure Your Hosts File
+Edit the Hosts file:
+```bash
+nano /etc/hosts
+vi /etc/hosts
+```
+E.G:
+Apply for Server 1, 2, and 3
+```
+192.168.10.27 cilestri-1.cilestri.id cilestri-1
+192.168.10.28 cilestri-2.cilestri.id cilestri-2
+192.168.10.29 cilestri-3.cilestri.id cilestri-3
+```
+Optional:
+```
+127.0.1.1 cilestri-2.cilestri.id cilestri-2
+```
+# 4. Configure your Hostname file
+a. Server 1
+```bash
+hostnamectl cilestri-1
+```
+b. Server 2
+```bash
+hostnamectl cilestri-2
+```
+c. Server 3
+```bash
+hostnamectl cilestri-3
+```
+Or you can do this way
+Edit the Hostname file:
+```bash
+nano /etc/hostname
+vi /etc/hostname
+```
+E.G:
+```
+cilestri-1
+cilestri-2
+cilestri-3
+```
+
+
+
+
+
