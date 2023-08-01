@@ -531,6 +531,8 @@ ping google.com
 # Restart DNS Server (bind9)
 service bind9 restart
 systemctl restart bind9.service
+# Check Bind9 status
+systemctl status bind9.service
 ```
 
 ```bash
@@ -647,6 +649,8 @@ options {
 ```
 Note:
 _"Untuk cara cepatnya bisa lakukan ini dengan mengirimkan file ke Server 2 (cilestri-2) sebagai Backup DNS dengan cara berikut:"_
+
+_"Jangan lupa untuk lakukan perintah ini 'systemd-resolve --flush-caches' dan di sisi client atau host 'ipconfig /flushdns' di Server 1-3 "_
 ```
 # Masuk direktorinya terlebih dahulu
 cd /etc/bind/
