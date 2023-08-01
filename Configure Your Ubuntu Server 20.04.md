@@ -241,7 +241,7 @@ Port 2023
 LoginGraceTime 2m
 # PermitRootLogin yes is NOT RECOMMENDED for Production but if you just want to train or practice only it prefer to enable it to remote easily and connected to "root" directly. 
 PermitRootLogin yes
-# I highly recommend you to keep PermitRootLogin is disable it "PermitRootLogin no" or "PermitRootLogin prohibit-password"
+# I highly recommend you to keep "PermitRootLogin" is disable it "#PermitRootLogin prohibit-password" or enable but "PermitRootLogin no"
 StrictModes yes
 MaxAuthTries 6
 MaxSessions 10
