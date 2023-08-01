@@ -192,7 +192,12 @@ cat /etc/resolv.conf
 rm /etc/resolv.conf
 ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf # If this command doesn't work you can use the second command below:
 ln -sf /run/resolvconf/resolv.conf /etc/resolv.conf
-echo "nameserver 8.8.8.8\nnameserver 8.8.4.4" >> /etc/resolv.conf
+# Server 1 (cilestri-1)
+echo "search cilestri.id\nnameserver 192.168.10.27\nnameserver 8.8.8.8\nnameserver 8.8.4.4" >> /etc/resolv.conf
+# Server 2 (cilestri-2)
+echo "search cilestri.id\nnameserver 192.168.10.28\nnameserver 8.8.8.8\nnameserver 8.8.4.4" >> /etc/resolv.conf
+# Server 3 (cilestri-3)
+echo "search cilestri.id\nnameserver 192.168.10.29\nnameserver 8.8.8.8\nnameserver 8.8.4.4" >> /etc/resolv.conf
 cat /etc/resolv.conf
 ```
 f. Verify your Network connection
@@ -205,6 +210,7 @@ ping bing.com
 ```
 ping 8.8.8.8
 ping 8.8.4.4
+ping 1.1.1.1
 ```
 # 6. User Management
 Add new user to your server
