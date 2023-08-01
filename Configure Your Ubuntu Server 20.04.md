@@ -259,6 +259,7 @@ service ssh restart
 systemctl restart ssh
 ```
 d. Verify your SSH connection
+E.G:
 ```
 # Remote from Server 1 to 2
 ssh -p 2023 root@192.168.10.28
@@ -279,9 +280,29 @@ ssh -p 2023 root@192.168.10.28
 ssh -p 2023 root@192.168.10.27
 ```
 If your server doesn't set Port to another Port, by default port is 22 so you do not need to add option -p. Just like this...
+E.G:
 ```
 ssh root@192.168.10.27
 ssh root@192.168.10.28
 ssh root@192.168.10.29
 ```
-
+e. Transfer file testing
+E.G:
+```
+# 1. Transfer or Send file 
+scp -P 2023 /tmp/file.txt root@192.168.10.27:/tmp/
+scp -P 2023 /tmp/file.txt root@192.168.10.28/tmp/
+scp -P 2023 /tmp/file.txt root@192.168.10.29/tmp/
+# Or
+scp -P 2023 file.txt root@192.168.10.27:/tmp/
+scp -P 2023 file.txt root@192.168.10.28/tmp/
+scp -P 2023 file.txt root@192.168.10.29/tmp/
+# 2. Get file
+scp -P 2023 root@192.168.10.27:/tmp/file.txt /tmp/
+scp -P 2023 root@192.168.10.28/tmp/file.txt /tmp/
+scp -P 2023 root@192.168.10.29/tmp/file.txt /tmp/
+# Or
+scp -P 2023 root@192.168.10.27:/tmp/file.txt .
+scp -P 2023 root@192.168.10.28/tmp/file.txt .
+scp -P 2023 root@192.168.10.29/tmp/file.txt .
+```
