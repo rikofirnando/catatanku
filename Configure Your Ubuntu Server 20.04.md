@@ -712,4 +712,6 @@ ufw allow 22
 ufw allow 53
 ufw allow 80
 ufw allow 443
+# Cek kembali untuk port apa saja yang sudah di berikan izin
+ufw status numbered
 ```
