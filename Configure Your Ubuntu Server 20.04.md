@@ -50,6 +50,7 @@ apt update;apt upgrade
 Edit this file:
 ```bash
 nano /etc/netplan/00-installer-config.yaml
+nano /etc/netplan/00-installer-config.yaml --linenumbers
 vi /etc/netplan/00-installer-config.yaml
 ```
 E.G Based on Your Network:
@@ -165,6 +166,7 @@ systemctl status resolvconf
 ```
 c. Edit this file:
 ```bash
+nano /etc/resolvconf/resolv.conf.d/head --linenumbers
 nano /etc/resolvconf/resolv.conf.d/head
 vi /etc/resolvconf/resolv.conf.d/head
 ```
@@ -190,6 +192,7 @@ cat /etc/resolv.conf
 rm /etc/resolv.conf
 ln -s /run/systemd/resolve/resolv.conf /etc/resolv.conf
 echo "nameserver 8.8.8.8\nnameserver 8.8.4.4" >> /etc/resolv.conf
+cat /etc/resolv.conf
 ```
 f. Verify your Network connection
 - Ping to DNS Forward (fDNS)
@@ -221,6 +224,25 @@ passwd ahlakiah
 a. Install SSH service
 ```bash
 apt install ssh
+apt install openssh-server -y
 ```
 b. 
-Edit
+Edit sshd_config file:
+```bash
+nano /etc/ssh/sshd_config
+nano /etc/ssh/sshd_config --linenumbers
+vi /etc/ssh/sshd_config
+```
+E.G:
+Note:
+_"Remove this "#" to enable your configuration"_
+```
+Port 2023
+LoginGraceTime 2m
+# PermitRootLogin yes is NOT RECOMMENDED for Production but if you just want to train or practice only it prefer to enable it to remote easily and connected to "root" directly. 
+PermitRootLogin yes
+# I highly recommend you to keep PermitRootLogin is disable it "PermitRootLogin no" or "PermitRootLogin prohibit-password"
+StrictModes yes
+MaxAuthTries 6
+MaxSessions 10
+```
