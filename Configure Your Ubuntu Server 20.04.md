@@ -715,3 +715,12 @@ ufw allow 443
 # Cek kembali untuk port apa saja yang sudah di berikan izin
 ufw status numbered
 ```
+
+# 10. Install Aditional Tools
+```
+# Net Tools (ifconfig)
+apt install net-tools
+# Ifupdown (ifupdown)
+apt install ifupdown
+```
+
