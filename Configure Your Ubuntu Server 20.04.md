@@ -729,7 +729,16 @@ ufw status numbered
 ```
 # Net Tools (ifconfig)
 apt install net-tools
-# Ifupdown (ifupdown)
+# Up and Down Network Interfaces (ifupdown)
 apt install ifupdown
+# Git
+apt install git
 ```
 
+## 11. Install Web Server (Apache2)
+a. Install Apache2
+```
+apt-get update
+apt install apache2
+```
+b
