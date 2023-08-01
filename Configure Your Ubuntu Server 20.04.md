@@ -694,6 +694,10 @@ dig 192.168.10.27
 dig 192.168.10.28
 # Do Tracepath
 tracepath cilestri
+# Do checkconf
+named-checkconf -p /etc/bind/named.conf
+named-checkconf -p /etc/bind/named.conf.local
+named-checkconf -p /etc/bind/named.conf.options
 ```
 # 9. Install UFW (Firewall)
 a. Install UFW
