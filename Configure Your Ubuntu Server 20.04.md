@@ -201,17 +201,25 @@ echo "search cilestri.id\nnameserver 192.168.10.29\nnameserver 8.8.8.8\nnameserv
 cat /etc/resolv.conf
 ```
 f. Verify your Network connection
-- Ping to DNS Forward (fDNS)
-```
-ping google.com
-ping bing.com
-```
 - Ping to DNS Reverse (rDNS)
 ```
 ping 8.8.8.8
 ping 8.8.4.4
 ping 1.1.1.1
+ping 192.168.10.27
+ping 192.168.10.28
+ping 192.168.10.29
 ```
+
+- Ping to DNS Forward (fDNS)
+```
+ping google.com
+ping bing.com
+ping cilestri.id
+ping ns1.cilestri.id
+ping ns2.cilestri.id
+```
+
 # 6. User Management
 Add new user to your server
 E.G:
