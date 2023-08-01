@@ -5,7 +5,7 @@ apt update && apt upgrade
 apt update;apt upgrade
 ```
 # If you have faced the problem while you are installing the package, do this. 
-## SKIP THESE STEPS IF YOU DIDN'T HAVE FACED THIS ISSUES!! THESE ARE OPTIONAL STEPS
+## SKIP THESE STEPS IF YOU DON'T FACE THIS ISSUES!! THESE ARE OPTIONAL STEPS
 ```bash
 apt-get update --fix-missing
 ```
