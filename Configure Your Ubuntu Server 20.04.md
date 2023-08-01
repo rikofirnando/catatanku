@@ -666,3 +666,26 @@ scp db.cilestri_fwd db.cilestri_rvs named.conf.options named.conf.local root@192
 # Tinggal ubah sedikit dan sesuaikan saja
 # Seperti DNS Forward, DNS Reverse, Zones, dan Domain Forwarders bisa ikuti contoh sebelumnya yang bagian Server 2 (cilestri-2) ya
 ```
+d. Verify your Domain Servers
+```
+# Do Ping
+ping cilestri.id
+ping ns1.cilestri.id
+ping ns2.cilestri.id
+ping www.cilestri.id
+ping blog.cilestri.id
+ping ftp.cilestri.id
+ping mail.cilestri.id
+ping monitor.cilestri.id
+ping 192.168.10.27
+ping 192.168.10.28
+# Do Nslookup
+nslookup cilestri.id
+nslookup 192.168.10.27
+nslookup 192.168.10.28
+# Do Dig
+dig cilestri.id
+dig 192.168.10.27
+dig 192.168.10.28
+```
+
