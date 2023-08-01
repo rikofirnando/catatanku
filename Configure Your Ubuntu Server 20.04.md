@@ -46,6 +46,11 @@ deb http://archive.ubuntu.com/ubuntu focal-updates main restricted universe mult
 deb http://archive.ubuntu.com/ubuntu focal-security main restricted universe multiverse
 ```
 
+# Or third way
+```
+echo "nameserver 8.8.8.8" | sudo tee /etc/resolv.conf > /dev/null
+```
+
 ## Then, update and upgrade again
 ```bash
 apt-get update && apt upgrade
