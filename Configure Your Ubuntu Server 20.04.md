@@ -306,3 +306,28 @@ scp -P 2023 root@192.168.10.27:/tmp/file.txt .
 scp -P 2023 root@192.168.10.28/tmp/file.txt .
 scp -P 2023 root@192.168.10.29/tmp/file.txt .
 ```
+f. Create Private and Public Key
+```
+ssh-keygen -t rsa
+
+# This information will be shown
+Generating public/private rsa key pair.
+Enter file in which to save the key (/root/.ssh/id_rsa):
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+```
+- Where is the id_rsa and id_rsa.pub located? By default is this directory ~
+```bash
+ls ~/.ssh
+```
+
+
+
+
+
+
+
+
+
+
+
