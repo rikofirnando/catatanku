@@ -381,10 +381,111 @@ cd /etc/bind/
 cp db.local db.cilestri_fwd
 cp db.local db.cilestri_rvs
 ```
-- Edit db.cilestri_fwd
+- Edit "db.cilestri_fwd" di sisi Server 1 (cilestri.id)
 ```
 nano db.cilestri_fwd
 nano db.cilestri_fwd --linenumbers
 vi db.cilestri_fwd
 ```
+- Edit DNS Forward like this. E.G:
+```
+;
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     cilestri.web. root.cilestri.web. (
+                              2         ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+@       IN      NS      ns1.cilestri.id.
+@       IN      NS      ns2.cilestri.id.
+@       IN      A       192.168.10.27
+@       IN      MX 5    mail.cilestri.id.
+@       IN      MX 5    192.168.10.27
+ns1     IN      A       192.168.10.27
+ns2     IN      A       192.168.10.28
+www     IN      A       192.168.10.27
+blog    IN      A       192.168.10.27
+ftp     IN      A       192.168.10.27
+mail    IN      A       192.168.10.27
+monitor IN      A       192.168.10.27
+```
+- Edit "db.cilestri_rvs" file di sisi Server 1 (cilestri.id)
+```
+nano db.cilestri_rvs
+nano db.cilestri_rvs --linenumbers
+vi db.cilestri_rvs
+```
+- Edit DNS Reverse like this. E.G:
+```
+;
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     cilestri.id. root.cilestri.id. (
+                              1         ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+@       IN      NS      ns1.cilestri.id.
+@       IN      NS      ns2.cilestri.id.
+27      IN      PTR     ns1.cilestri.id.
+28      IN      PTR     ns2.cilestri.id.
+27      IN      PTR     cilestri.id.
+27      IN      PTR     www.cilestri.id.
+27      IN      PTR     blog.cilestri.id.
+27      IN      PTR     mail.cilestri.id.
+27      IN      PTR     ftp.cilestri.id.
+27      IN      PTR     monitor.cilestri.id.
+```
+- Edit "named.conf.local" file di sisi Server 1 (cilestri.id)
+```
+nano named.conf.local
+nano named.conf.local --linenumbers
+vi named.conf.local
+```
 
+- Edit Zones file like this. E.G:
+```
+zone "cilestri.id" IN {
+        type master;
+        file "/etc/bind/db.cilestri_fwd";
+        allow-transfer {192.168.10.28;};
+};
+
+zone "10.168.192.in-addr.arpa" IN {
+    type master;
+    file "/etc/bind/db.cilestri_rvs";
+    allow-transfer {192.168.10.28;};
+};
+```
+- Edit "named.conf.options" file di sisi Server 1 (cilestri.id)
+```
+nano named.conf.options
+nano named.conf.options --linenumbers
+vi named.conf.options
+```
+
+- Edit DNS file like this. E.G:
+```
+options {
+        directory "/var/cache/bind";
+
+        allow-query{any;};
+        recursion yes;
+
+        forwarders {
+        192.168.10.27;
+        8.8.8.8;
+        8.8.4.4;
+        };
+        dnssec-validation auto;
+
+        #listen-on-v6 { any; };
+};
+```
