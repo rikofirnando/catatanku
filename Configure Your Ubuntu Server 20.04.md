@@ -202,7 +202,7 @@ ping bing.com
 ping 8.8.8.8
 ping 8.8.4.4
 ```
-## 6. User Management
+# 6. User Management
 Add new user to your server
 E.G:
 ``` bash
@@ -217,4 +217,10 @@ passwd riko
 useradd reffal
 passwd ahlakiah
 ```
-
+# 7. Install and Configure SSH Service
+a. Install SSH service
+```bash
+apt install ssh
+```
+b. 
+Edit
