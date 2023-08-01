@@ -1,17 +1,20 @@
-# 1. Update and Upgrade Your Repositories
+# 1. Update and Upgrade Your Repositories after installing your Ubuntu Server.
 ```bash
-apt udpate && apt upgrade
+apt-get update && apt upgrade
+apt update && apt upgrade
+apt update;apt upgrade
 ```
-# 2. If you have faced the problem while you are installing the package, do this. 
+# If you have faced the problem while you are installing the package, do this. 
 ## SKIP THESE STEPS IF YOU DIDN'T HAVE FACED THIS ISSUES!! THESE ARE OPTIONAL STEPS
 ```bash
 apt-get update --fix-missing
 ```
-## Change the repository to the nearest your country
+## Or you can hange your repositories to the nearest your country
+Edit inside of this file:
 ```bash
 nano /etc/apt/sources.list
 ```
-Edit inside of this file:
+E.G:
 Add these repositories
 # a. Kambing UI
 deb http://kambing.ui.ac.id/debian/ bullseye main contrib non-free
@@ -36,4 +39,73 @@ deb http://kebo.pens.ac.id/ubuntu/ jammy-security main restricted universe multi
 deb http://kebo.pens.ac.id/ubuntu/ jammy-backports main restricted universe multiverse
 deb http://kebo.pens.ac.id/ubuntu/ jammy-proposed main restricted universe multiverse
 
-# Install SSH
+## Then, update and upgrade again
+```bash
+apt-get update && apt upgrade
+apt update && apt upgrade
+apt update;apt upgrade
+```
+
+# 2. Set Network (Netplan)
+Edit this file:
+```bash
+nano /etc/netplan/00-installer-config.yaml
+vi /etc/netplan/00-installer-config.yaml
+```
+E.G Based on Your Network:
+a. Server 1 (Cilestri-1)
+```
+# This is the network config written by 'subiquity'
+network:
+  version: 2
+  ethernets:
+    eth0@if22:
+      addresses: [192.168.10.27/24]
+      nameservers:
+         addresses:
+         - 192.168.10.27            # Domain: ns.cilestri.id
+         - 8.8.8.8                  # First Google DNS
+         - 8.8.4.4                  # Second Google DNS
+         search: [ ns1.cilestri.id ] # First DNS Zone
+         search: [ ns2.cilestri.id ] # Second DNS Zone
+```
+b. Server 2 (Cilestri-2)
+```
+# This is the network config written by 'subiquity'
+network:
+  version: 2
+  ethernets:
+    eth0@if22:
+      addresses: [192.168.10.28/24]
+      nameservers:
+         addresses:
+         - 192.168.10.28            # Domain: ns.cilestri.id
+         - 8.8.8.8                  # First Google DNS
+         - 8.8.4.4                  # Second Google DNS
+         search: [ ns1.cilestri.id ] # First DNS Zone
+         search: [ ns2.cilestri.id ] # Second DNS Zone
+```
+c. Server 3 (Cilestri-3)
+```
+# This is the network config written by 'subiquity'
+network:
+  version: 2
+  ethernets:
+    eth0@if22:
+      addresses: [192.168.10.29/24]
+      nameservers:
+         addresses:
+         - 192.168.10.29            # Domain: ns.cilestri.id
+         - 8.8.8.8                  # First Google DNS
+         - 8.8.4.4                  # Second Google DNS
+         search: [ ns1.cilestri.id ] # First DNS Zone
+         search: [ ns2.cilestri.id ] # Second DNS Zone
+```
+Terapkan konfigurasi netplan
+```bash
+netplan try
+```
+Or you can apply your netplan configuration directly.
+```bash
+netplan apply
+```
