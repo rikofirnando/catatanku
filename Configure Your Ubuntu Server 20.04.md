@@ -190,7 +190,7 @@ cat /etc/resolv.conf
 ## If you have faced the problem with your name resolution, do this.
 ``` bash
 rm /etc/resolv.conf
-ln -s /run/systemd/resolve/resolv.conf /etc/resolv.conf
+ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
 echo "nameserver 8.8.8.8\nnameserver 8.8.4.4" >> /etc/resolv.conf
 cat /etc/resolv.conf
 ```
