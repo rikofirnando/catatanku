@@ -260,12 +260,18 @@ StrictModes yes
 MaxAuthTries 6
 MaxSessions 10
 ```
-c. Restart SSH service
+c. Restart and check status SSH service
+- Restart SSH
 ```bash
 /etc/init.d/ssh restart
 service ssh restart
 systemctl restart ssh
 ```
+- Check SSH status
+```
+systemctl status ssh
+```
+
 d. Verify your SSH connection
 E.G:
 ```
@@ -349,10 +355,32 @@ ssh root@192.168.10.28 -p 2023
 ssh root@192.168.10.29 -p 2023
 ```
 
-
-
-
-
-
-
-
+# 8. Install DNS Serveer (bind9)
+a. Install Bind9
+```
+apt install bind9 -y
+```
+b. Install DNS Utils
+```
+apt install dnsutils
+```
+- Check Bind9 status
+```
+systemctl status bind9
+```
+c. Create duplicate template
+- Go to Bind directory
+```
+cd /etc/bind/
+```
+- Create duplicate templates DNS Forward & Reverse
+```bash
+cp db.local db.cilestri_fwd
+cp db.local db.cilestri_rvs
+```
+- Edit db.cilestri_fwd
+```
+nano db.cilestri_fwd
+nano db.cilestri_fwd --linenumbers
+vi db.cilestri_fwd
+```
