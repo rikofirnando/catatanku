@@ -39,6 +39,13 @@ deb http://kebo.pens.ac.id/ubuntu/ jammy-security main restricted universe multi
 deb http://kebo.pens.ac.id/ubuntu/ jammy-backports main restricted universe multiverse
 deb http://kebo.pens.ac.id/ubuntu/ jammy-proposed main restricted universe multiverse
 
+# Default Repositories from Ubuntu
+```
+deb http://archive.ubuntu.com/ubuntu focal main restricted universe multiverse
+deb http://archive.ubuntu.com/ubuntu focal-updates main restricted universe multiverse
+deb http://archive.ubuntu.com/ubuntu focal-security main restricted universe multiverse
+```
+
 ## Then, update and upgrade again
 ```bash
 apt-get update && apt upgrade
