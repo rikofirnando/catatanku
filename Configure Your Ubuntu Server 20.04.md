@@ -796,13 +796,114 @@ drop database library
 drop table buku;
 
 ```
+f. Install PHP & Extensions and Check PHP version
+```
+# Install PHP & Extensions
+apt install php php-cgi libapache2-mod-php php-common php-pear php-mbstring -y
+# Check PHP version
+php -v
+```
+g. Active Module & Reload Apache2
+```
+# Active Module
+a2enconf php8.1-cgi
+# Reload Apache2
+systemctl reload apache2
+```
+h. Edit Date Timezone and Masukan sesuaikan dengan zona negara masing-masing
+```
+# Edit file
+nano /etc/php/8.1/apache2/php.ini
+nano /etc/php/8.1/apache2/php.ini --linenumbers
+vi /etc/php/8.1/apache2/php.ini
+# 
+date.timezone = Asia/Jakarta
+```
+i. Create file and masukan teks PHP ini "<?php phpinfo(); ?>"
+```
+echo "<?php phpinfo(); ?>" | sudo tee /var/www/html/info.php
+```
+j. Masukan dan set DNS melalui Windows agar dapat diakses Domain cukup menggunakan nama tanpa harus menggunakan IP Address
+```
+# Edit file "hosts" di Windows 
+C:/Windows/System32/drivers/etc/hosts
+# Tambahkan paling bawah skrip. E.G berikut:
+# Sesuaikan dengan jaringan lokal masing-masing
+192.168.10.23 cilestri.id
+192.168.10.27 cilestri.id
+192.168.10.28 cilestri.id
 
+# On Windows
+# Set DNS Static on your Network Adapter
+# Go to "Control Panel\Network and Internet\Network and Sharing Center"
+# Then click "Ethernet" based on your Ethernet Adapter name >
+# Click "Properties" > Double Click Internet Protocl Version 4 (TCP/IPv4)
+# Checklist "Use the following DNS server addresses:"
+# Fill in "Preferred DNS server: 192.168.10.27" & "Alternate DNS server: 192.168.10.28"
+# Then click "OK" 2x and "Close"
+```
+k. Pengujian Web Server dan PHP yang telah dibuat
+```
+# Access the Web Server. E.G:
+http://cilestri.id
+# Or you can access by using IP Address
+http://192.168.10.27
+# You want to check PHP wheter is running or not
+http://cilestri.id/info.php
+http://192.168.10.27/info.php
+```
+l. Install PHP-FPM (PHP FastCGI Manager), enable module, dan edit tambahkan skrip berikut:
+```
+# Backup file default configuration
+cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/000-default.conf.backup
+# Edit file "000-default.conf"
+nano /etc/apache2/sites-available/000-default.conf
+# Enable web configuration
+a2ensite 000-default.conf
+# Restart Apache2
+service apache2 restart
+# Enable Modules
+a2enmod proxy_fcgi setenvif
+a2enconf php8.1-fpm
+# Restart "php8.1-fpm" and "apache2"
+systemctl restart php8.1-fpm apache2
+```
+m. Create new directory for Games and Git Clone "2048.git"
+```
+# Create new directory "Games"
+mkdir /var/www/games/
+# Git Clone "2048.git"
+git clone -v https://github.com/gabrielecirulli/2048.git /var/www/games
+# Change Owner to "www-data:www-data"
+chown -R www-data:www-data /var/www/games
+# Go to directory "sites-available"
+cd /etc/apache2/sites-available
+# Create duplicate file Web configuration
+cp 000-default.conf games.conf
+# Enable Web configuration
+a2ensite games.conf
+# Disable Web configuration
+a2dissite 000-default.conf
+# Edit file "games.conf"
+nano games.conf
+# Add this script
+<VirtualHost *:80>
+        <FilesMatch \.php$>
+                SetHandler "proxy:unix:/var/run/php/php8.1-fpm.sock|fcgi://localhost/"
+        </FilesMatch>
 
+        ServerName www.cilestri.id
 
+        ServerAdmin webmaster@localhost
+        DocumentRoot /var/www/games
 
-
-
-
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+# Reload and Check Apache2 status
+systemctl reload apache2.service
+systemctl status apache2.service
+```
 
 
 
