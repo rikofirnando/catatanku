@@ -764,7 +764,7 @@ Disallow root login remotely [Y/n] y
 Remove test database and access to it? [Y/n] y
 Reload privilege tables now? [Y/n] y
 ```
-e. Tes login with "root" user
+e. Tes login with "root" user, Show Database, Use, Create, Insert, Save Show a few Columns, Drop Database, and Drop Tables
 ```
 mysql -u root -p
 
