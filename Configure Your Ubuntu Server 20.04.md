@@ -725,7 +725,7 @@ ufw allow 443
 ufw status numbered
 ```
 
-# 10. Install Aditional Tools
+# 10. Install Additional Tools
 ```
 apt-get update
 # Net Tools (ifconfig)
@@ -734,6 +734,14 @@ apt install net-tools
 apt install ifupdown
 # Git
 apt install git
+# Composer
+apt install composer
+# NPM (Yarn)
+apt install npm
+# CMD Test
+apt install cmdtest
+# Plocate
+apt install plocate
 ```
 
 ## 11. Install Web Server 
