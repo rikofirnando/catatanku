@@ -741,7 +741,7 @@ a. Install Apache2
 ```
 apt-get update
 apt-get update --fix-missing
-apt install apache2
+apt install apache2 apache2-utils
 ```
 b. Check Apache2 status
 ```
@@ -904,8 +904,12 @@ nano games.conf
 systemctl reload apache2.service
 systemctl status apache2.service
 ```
-
-
+```
+mysql -u root -p
+# Password: (Masukan password)
+# Jalankan perintah ini untuk mereset password untuk "root"
+SET PASSWORD FOR root@localhost=PASSWORD('');
+```
 
 
 
