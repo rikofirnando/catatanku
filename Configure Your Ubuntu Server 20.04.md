@@ -727,6 +727,7 @@ ufw status numbered
 
 # 10. Install Aditional Tools
 ```
+apt-get update
 # Net Tools (ifconfig)
 apt install net-tools
 # Up and Down Network Interfaces (ifupdown)
@@ -735,10 +736,94 @@ apt install ifupdown
 apt install git
 ```
 
-## 11. Install Web Server (Apache2)
+## 11. Install Web Server 
 a. Install Apache2
 ```
 apt-get update
+apt-get update --fix-missing
 apt install apache2
 ```
-b
+b. Check Apache2 status
+```
+systemctl status apache2.service
+```
+c. Install Mariadb Server
+```
+apt install mariadb-server
+```
+d. Setup MySQL/MariaDB
+```
+mysql_secure_installation
+
+#
+Enter current password for root (enter for none): (You can fill your password for root user. Fill blank if you don't want to blank password.)
+Switch to unix_socket authentication [Y/n] n
+Change the root password? [Y/n] n
+Remove anonymous users? [Y/n] y
+Disallow root login remotely [Y/n] y
+Remove test database and access to it? [Y/n] y
+Reload privilege tables now? [Y/n] y
+```
+e. Tes login with "root" user
+```
+mysql -u root -p
+
+# Fill the password, if requered
+...
+# Show Databases
+show databases;
+# Show tables
+show tables;
+# Show a few columns
+select host,user,password from mysql.user;
+# Create New Database
+create database library;
+# Select New Database
+use library;
+# Create New Table
+create table library.buku (id_buku int AUTO_INCREMENT, judul_buku varchar(50), penulis_buku varchar(50), primary key(id_buku));
+# INsert Record or Row
+insert into library.buku(id_buku, judul_buku, penulis_buku) values (1, "MikroTik", "Riko");
+insert into library.buku(id_buku, judul_buku, penulis_buku) values "2, "Cisco", "Reffal");
+# Save Transaction Record
+commit;
+commit work;
+# Show Buku table
+select * from library.buku
+# Delete Database
+drop database library
+# Delete Table
+drop table buku;
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
