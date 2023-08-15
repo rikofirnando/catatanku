@@ -1,12 +1,12 @@
 # 1. Update and Upgrade Your Repositories after installing your Ubuntu Server.
-```bash
+```
 apt-get update && apt upgrade
 apt update && apt upgrade
 apt update;apt upgrade
 ```
 # If you have faced the problem while you are installing the package, do this. 
 ## SKIP THESE STEPS IF YOU DON'T FACE THIS ISSUES!! THESE ARE OPTIONAL STEPS
-```bash
+```
 apt-get update --fix-missing
 ```
 ## Or you can hange your repositories to the nearest your country
@@ -16,6 +16,7 @@ nano /etc/apt/sources.list
 ```
 E.G:
 Add these repositories
+```
 # a. Kambing UI
 deb http://kambing.ui.ac.id/debian/ bullseye main contrib non-free
 deb http://kambing.ui.ac.id/debian/ bullseye-updates main contrib non-free
@@ -40,7 +41,6 @@ deb http://kebo.pens.ac.id/ubuntu/ jammy-backports main restricted universe mult
 deb http://kebo.pens.ac.id/ubuntu/ jammy-proposed main restricted universe multiverse
 
 # Default Repositories from Ubuntu
-```
 deb http://archive.ubuntu.com/ubuntu focal main restricted universe multiverse
 deb http://archive.ubuntu.com/ubuntu focal-updates main restricted universe multiverse
 deb http://archive.ubuntu.com/ubuntu focal-security main restricted universe multiverse
