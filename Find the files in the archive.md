@@ -43,3 +43,4 @@ find /data/ \( -name "*.log" -o -name "*.txt" -o -name "*.ctl" -o -name "*.log.g
 
 find /data/ \( -name "*.log" -o -name "*.txt" -o -name "*.ctl" -o -name "*.log.gz" -o -name "*.txt.gz" \) ! -name "LEDGER_SNAPSHOT_*.log" ! -name "LEDGER_SNAPSHOT_*.ctl" -print | xargs gzip -v
 
+find "/data/" -type f -exec du -h {} + | sort -rh | head -n 50
