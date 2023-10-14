@@ -22,10 +22,12 @@ find /data/ -type f -iname 'LEDGER_SNAPSHOT_*.log'
 ```
 find "/" -iname 'LOENA_CAMPAIGN_TRACKING_SNAPSHOT' -o -iname 'LOENA_LEDGER' -o -iname 'LOENA_OFFER_VALIDATION' -o -iname 'LOENA_PAYMENT_REMINDER' -o -iname 'LOENA_PULL_OFFER' -o -iname 'LOENA_PUSH_OFFER' -o -iname 'LOENA_FULFILLMENT'
 
+```
 find /data/ -type f -exec du -h {} + | sort -rh
 find /data/ -type f -exec du -h {} + | sort -rh | head -n 100
 find /data/ -type f -exec du -h {} + | sort -rh | tail -n 100
 df -ah /data/
+```
 
 find "/data/" -type f -iname 'LEDGER_SNAPSHOT_*.log' -ctime -1 
 
