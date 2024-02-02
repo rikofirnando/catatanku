@@ -22,3 +22,6 @@ tmux ls
 ```
 tmux a -t 0
 ```
+```
+CTRL+B & 0
+```
