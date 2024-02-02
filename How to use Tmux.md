@@ -15,3 +15,10 @@ Or
 ```
 CTRL+D
 ```
+
+```
+tmux ls
+```
+```
+tmux a -t 0
+```
