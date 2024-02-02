@@ -26,6 +26,7 @@ find "/" -iname 'LOENA_CAMPAIGN_TRACKING_SNAPSHOT' -o -iname 'LOENA_LEDGER' -o -
 find /data/ -type f -exec du -h {} + | sort -rh
 find /data/ -type f -exec du -h {} + | sort -rh | head -n 100
 find /data/ -type f -exec du -h {} + | sort -rh | tail -n 100
+nd . -type f -print0 | xargs -0 du -s | sort -n | tail -10 | cut -f2 | xargs -I{} du -sh {}
 df -ah /data/
 ```
 
