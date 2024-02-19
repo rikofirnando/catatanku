@@ -1,0 +1,11 @@
+ps -eo pid,lstart,cmd | grep tomcat_bi_receiver
+ps -eo pid,lstart,cmd | grep tomcat_mb_receiver
+ps -eo pid,lstart,cmd | grep tomcat_loan_record
+ps -eo pid,lstart,cmd | grep tomcat_cls
+ps -eo pid,lstart,cmd | grep tomcat_payment_receiver
+ps -eo pid,lstart,cmd | grep be_bd_bi
+ps -eo pid,lstart,cmd | grep be_bd_tc
+ps -eo pid,lstart,cmd | grep ke_receiver
+ps -eo pid,lstart,cmd | grep kd_receiver
+ps -eo pid,lstart,cmd | grep kp_receiver
+ps -eo pid,lstart,cmd | grep stub_bi_mb
