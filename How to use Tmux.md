@@ -45,6 +45,6 @@ sar -u -f /var/log/sa/sa20
 ```
 
 CTRL+B & C New session
-
-
+To move another window
+CTRL+Up or Down Left or Right Arrow
 
