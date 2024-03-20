@@ -2,6 +2,10 @@
 ```
 tmux new -s test123
 ```
+or
+```
+tmux
+```
 # Join the session
 ```
 tmux a -t tes123
@@ -35,5 +39,12 @@ sar -r -f /var/log/sa/sa01 | more
 sar -r -f /var/log/sa/sa02 | more
 sar -r -f /var/log/sa/sa03 | more
 ```
+```
+sar -r -f /var/log/sa/sa20
+sar -u -f /var/log/sa/sa20
+```
+
 CTRL+B & C New session
+
+
 
