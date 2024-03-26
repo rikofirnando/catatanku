@@ -27,7 +27,7 @@ tmux ls
 tmux a -t 0
 ```
 ```
-CTRL+B & 0 / CTRL+B & 1 / CTRL+B & 2 / CTRL+B & 3
+CTRL+B 0 / CTRL+B 1 / CTRL+B 2 / CTRL+B 3
 ```
 ```
 sar -r -f /var/log/sa/sa01 | less
@@ -44,7 +44,29 @@ sar -r -f /var/log/sa/sa20
 sar -u -f /var/log/sa/sa20
 ```
 
-CTRL+B & C New session
-To move another window
-CTRL+Up or Down Left or Right Arrow
+# Create new session
+```
+CTRL+B C
+```
 
+# Exit the session
+```
+CTRL+B D
+```
+Or
+```
+tmux detach
+```
+Or
+```
+Exit
+```
+Or
+```
+logout
+```
+
+# To move another window
+```
+CTRL+Up or Down or Left or Right Arrow
+```
